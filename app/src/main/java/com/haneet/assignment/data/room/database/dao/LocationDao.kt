@@ -18,8 +18,7 @@ interface LocationDao {
     @Query("select * from locationMaster")
     fun getAllLocations(): List<LocationTable>
 
-    @Query("SELECT * FROM locationMaster ORDER BY Loc_Time DESC LIMIT 1")
-    fun getLastLocation(): LocationTable
+
 
     @Update
     fun updateUser(LocationTable: LocationTable?)

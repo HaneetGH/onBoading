@@ -4,6 +4,8 @@ import android.Manifest
 import android.app.ActionBar
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +15,7 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -28,27 +31,31 @@ import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.haneet.assignment.R
 import com.haneet.assignment.base.BaseClass
+import com.haneet.assignment.data.data_model.LocationTable
 import com.haneet.assignment.databinding.LocationFetchFromMapActivityViewBinding
 import com.haneet.assignment.interfaces.RecyclerViewClickListener
-import com.haneet.assignment.ui.location.LocationFetchFromMapActivity
+import com.haneet.assignment.ui.onboarding.ListActivityViewModel
 import com.haneet.assignment.utils.DrawCustomMarker
 import com.haneet.assignment.utils.LocationProviderLiveData.Companion.getInstance
 import com.thekhaeng.pushdownanim.PushDownAnim
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+
 @AndroidEntryPoint
 class LocationFetchFromMapActivity : BaseClass(), RecyclerViewClickListener {
-    var inflater: LayoutInflater? = null
-    var mCustomMarkerView: View? = null
+    private var inflater: LayoutInflater? = null
+    private var mCustomMarkerView: View? = null
     private var binding: LocationFetchFromMapActivityViewBinding? = null
     private var googleMap: GoogleMap? = null
     private var centreX = 0
     private var centreY = 0
     private var drawCustomMarker: DrawCustomMarker? = null
     private var currentLocation: Location? = null
+    private val viewModel by viewModels<LocationFetchViewModel>()
 
     // private Prediction mAddresses;
+    private var locationTable = LocationTable()
     var AUTOCOMPLETE_REQUEST_CODE = 666
     var isFromAutoComplete = false
     public override fun setBinding() {
@@ -156,15 +163,22 @@ class LocationFetchFromMapActivity : BaseClass(), RecyclerViewClickListener {
             .setOnClickListener { view: View? -> onBackPressed() }
         PushDownAnim.setPushDownAnimTo(binding!!.btnDone)
             .setOnClickListener { view: View? ->
-                val intent = Intent()
-                //  intent.putExtra("data", selectedAddress);
-                setResult(RESULT_OK, intent)
-                finish()
+                viewModel.saveAddress(locationTable)
+
             }
         PushDownAnim.setPushDownAnimTo(binding!!.ivSearch)
             .setOnClickListener { onSearchCalled() }
         PushDownAnim.setPushDownAnimTo(binding!!.addressBar)
             .setOnClickListener { view: View? -> onSearchCalled() }
+
+
+
+
+        viewModel.done.observe(this, {
+            val intent = Intent()
+            setResult(RESULT_OK, intent)
+            finish()
+        })
     }
 
     override fun onBackPressed() {
@@ -198,6 +212,7 @@ class LocationFetchFromMapActivity : BaseClass(), RecyclerViewClickListener {
     private fun fetchLocation() {
         requestLocation()
     }
+
     private fun requestLocation() {
         if (true) {
             getInstance(applicationContext).getMeLocation()
@@ -232,7 +247,44 @@ class LocationFetchFromMapActivity : BaseClass(), RecyclerViewClickListener {
         }
     }
 
-    private fun fetchAddress(source: LatLng) {}
+    private fun fetchAddress(source: LatLng) {
+
+
+        val addresses: List<Address>
+        val geocoder = Geocoder(this, Locale.getDefault())
+
+        addresses = geocoder.getFromLocation(
+            source.latitude,
+            source.longitude,
+            1
+        ) // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+        val address: String =
+            addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+
+        try {
+
+            val city: String = addresses[0].locality
+            val state: String = addresses[0]?.adminArea
+            val country: String = addresses[0]?.countryName
+            val postalCode: String = addresses[0]?.postalCode
+            val knownName: String =
+                addresses[0]?.featureName // Only if available else return NULL
+
+            locationTable = LocationTable()
+            locationTable.Lat = source.latitude
+            locationTable.Lng = source.longitude
+            locationTable.address = address
+            locationTable.city = if (addresses[0].locality == null) state else city
+
+            binding?.usraddress = address
+        } catch (e: Exception) {
+            Log.e("Location Not", e.message.toString())
+            binding?.usraddress = address
+        }
+
+    }
+
     private fun activateMapListner(googleMap: GoogleMap) {
         googleMap.setOnCameraIdleListener {
             Log.d("Khl", "idel" + googleMap.projection.visibleRegion.latLngBounds.center)
