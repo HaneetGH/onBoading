@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+
+        <variable
+            name="model"
+            type="com.haneet.assignment.data.data_model.LocationTable" />
+
+
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/llMain"
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginVertical="@dimen/_2sdp"
+
+        android:layout_marginLeft="@dimen/_2sdp"
+        android:layout_marginRight="@dimen/_2sdp"
+        android:orientation="vertical"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="@dimen/_1sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+
+
+            android:orientation="vertical">
+
+            <TextView
+
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_3sdp"
+
+                android:paddingHorizontal="@dimen/_2sdp"
+                android:singleLine="true"
+                android:text="@{model.city}"
+
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:paddingHorizontal="@dimen/_2sdp"
+                android:singleLine="true"
+                android:text="@{model.address}"
+                android:textSize="@dimen/_12ssp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

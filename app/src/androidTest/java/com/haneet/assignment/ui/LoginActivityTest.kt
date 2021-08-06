@@ -11,7 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import com.haneet.assignment.R
-import com.haneet.assignment.ui.onboarding.ListActivity
+import com.haneet.assignment.ui.list.ListActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matcher

@@ -34,7 +34,6 @@ import com.haneet.assignment.base.BaseClass
 import com.haneet.assignment.data.data_model.LocationTable
 import com.haneet.assignment.databinding.LocationFetchFromMapActivityViewBinding
 import com.haneet.assignment.interfaces.RecyclerViewClickListener
-import com.haneet.assignment.ui.onboarding.ListActivityViewModel
 import com.haneet.assignment.utils.DrawCustomMarker
 import com.haneet.assignment.utils.LocationProviderLiveData.Companion.getInstance
 import com.thekhaeng.pushdownanim.PushDownAnim

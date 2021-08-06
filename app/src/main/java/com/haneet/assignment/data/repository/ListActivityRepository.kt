@@ -20,7 +20,7 @@ import java.net.URL
 import javax.inject.Inject
 
 
-class MainActivityRepository @Inject constructor(
+class ListActivityRepository @Inject constructor(
     @ApplicationContext context: Context, private val locationDao: LocationDao
 ) : BaseRepository() {
     private val appContext = context.applicationContext
@@ -35,11 +35,11 @@ class MainActivityRepository @Inject constructor(
                 var response = locationDao.getAllLocations()
                 emit(DataState.Success(response, Task.FETCH))
             } catch (e: Exception) {
-                //  emit(DataState.ErrorString(e.toString(), Task.HIRE_DRIVER_SLOTS))
+              Log.e("fetch erroe",e.message.toString());
             }
 
 
-        }.catch {
+        }.flowOn(Dispatchers.IO).catch {
             emit(
                 DataState.ErrorThrowable(
                     it,
@@ -48,14 +48,6 @@ class MainActivityRepository @Inject constructor(
             )
         } // Use the IO thread for this Flow // Use the IO thread for this Flow // Use the IO thread for this Flow
     }
-
-
-
-
-
-
-
-
 
 
 }
