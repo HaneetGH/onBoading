@@ -3,7 +3,9 @@ package com.haneet.assignment.data.repository
 
 import android.content.Context
 import android.util.Log
+import com.google.android.gms.maps.model.LatLng
 import com.haneet.assignment.constant.Task
+import com.haneet.assignment.data.WeatherApi
 import com.haneet.assignment.data.room.database.dao.LocationDao
 import com.haneet.assignment.domain.DataState
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -21,21 +23,27 @@ import javax.inject.Inject
 
 
 class MainActivityRepository @Inject constructor(
-    @ApplicationContext context: Context, private val locationDao: LocationDao
+    @ApplicationContext context: Context, private val weatherApi: WeatherApi
 ) : BaseRepository() {
     private val appContext = context.applicationContext
+    var API_KEY = "fae7190d7e6433ec3a45285ffcf55c86"
 
-
-    suspend fun fetchBookmark(
+    suspend fun fetchWeather(
+        latLng: LatLng
     ): Flow<DataState> {
         return flow {
-            emit(DataState.Loading(Task.FETCH))
+            emit(DataState.Loading(Task.FETCH_WEATHER))
             // var response: VehicleCategoriesList = null
             try {
-                var response = locationDao.getAllLocations()
-                emit(DataState.Success(response, Task.FETCH))
+                var response = weatherApi.getWeatherData(
+                    latLng!!.latitude,
+                    latLng!!.longitude,
+                    "metric",
+                    API_KEY
+                )
+                emit(DataState.Success(response, Task.FETCH_WEATHER))
             } catch (e: Exception) {
-                //  emit(DataState.ErrorString(e.toString(), Task.HIRE_DRIVER_SLOTS))
+                Log.e("fetch erroe",e.message.toString());
             }
 
 
@@ -43,19 +51,11 @@ class MainActivityRepository @Inject constructor(
             emit(
                 DataState.ErrorThrowable(
                     it,
-                    Task.FETCH
+                    Task.FETCH_WEATHER
                 )
             )
         } // Use the IO thread for this Flow // Use the IO thread for this Flow // Use the IO thread for this Flow
     }
-
-
-
-
-
-
-
-
 
 
 }

@@ -38,12 +38,12 @@ class TemperatureGraphView : View {
     }
 
     var isBold: Boolean = false
-        set(value) {
-            field = value
-            if (isBold)
-                textPaint.typeface = Typeface.DEFAULT_BOLD
-            else textPaint.typeface = Typeface.DEFAULT
-        }
+    set(value) {
+        field = value
+        if (isBold)
+            textPaint.typeface = Typeface.DEFAULT_BOLD
+        else textPaint.typeface = Typeface.DEFAULT
+    }
 
     init {
         dotPaint = initDotPaint()
@@ -54,16 +54,16 @@ class TemperatureGraphView : View {
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
+    context,
+    attrs,
+    defStyleAttr
     )
 
     constructor(
         context: Context?,
-        attrs: AttributeSet?,
-        defStyleAttr: Int,
-        defStyleRes: Int
+    attrs: AttributeSet?,
+    defStyleAttr: Int,
+    defStyleRes: Int
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
     override fun draw(canvas: Canvas?) {

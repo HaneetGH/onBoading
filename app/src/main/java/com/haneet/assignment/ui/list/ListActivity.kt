@@ -45,7 +45,13 @@ class ListActivity : BaseClass() {
     }
 
     private fun setAdapter() {
-        listAdapter = ListAdapter(listOfLocations, this) { v, position -> }
+        listAdapter = ListAdapter(listOfLocations, this) { v, position ->
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("lat", listOfLocations[position].Lat)
+            intent.putExtra("lng", listOfLocations[position].Lng)
+            startActivity(intent)
+
+        }
         binding.adapter = listAdapter
     }
 

@@ -61,8 +61,8 @@ class TemperatureGraphView2 : View {
         super.draw(canvas)
 
 
-       // canvas?.drawText("20", 10f, 25f, textPaint)
-        drawCurrentTemperature(canvas!!,textPaint)
+        // canvas?.drawText("20", 10f, 25f, textPaint)
+        drawCurrentTemperature(canvas!!, textPaint)
         drawCurrentTempDot(canvas!!, dotPaint)
         drawLineToNext(canvas!!, linePaint)
         /*canvas?.let {
@@ -73,13 +73,11 @@ class TemperatureGraphView2 : View {
         }*/
 
 
-
-
     }
 
     private fun initDotPaint(): Paint {
         val dotPaint = Paint()
-        dotPaint.color =resources.getColor(R.color.white)// themedColor
+        dotPaint.color = resources.getColor(R.color.white)// themedColor
         dotPaint.flags = Paint.ANTI_ALIAS_FLAG
         return dotPaint
     }
@@ -100,14 +98,14 @@ class TemperatureGraphView2 : View {
         textPaint.textSize = 20f //spToPx(14f).toFloat()
         return textPaint
 
-      /*  val paint = Paint()
-        paint.color = Color.WHITE
-        paint.style = Paint.Style.FILL
-       // canvas!!.drawPaint(paint)
+        /*  val paint = Paint()
+          paint.color = Color.WHITE
+          paint.style = Paint.Style.FILL
+         // canvas!!.drawPaint(paint)
 
-        paint.color = Color.BLACK
-        paint.textSize = 20f
-        return paint*/
+          paint.color = Color.BLACK
+          paint.textSize = 20f
+          return paint*/
     }
 
     private fun drawCurrentTempDot(canvas: Canvas, paint: Paint) {
@@ -124,7 +122,7 @@ class TemperatureGraphView2 : View {
         canvas.drawText(
             "8℃",
             10f,
-           25f,
+            25f,
             paint
         )
 
@@ -135,7 +133,7 @@ class TemperatureGraphView2 : View {
 
         }
         canvas.drawLine(
-            10f,20f,30f,
+            10f, 20f, 30f,
             40f,
             paint
         )

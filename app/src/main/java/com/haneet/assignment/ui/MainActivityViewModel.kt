@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.maps.model.LatLng
 import com.haneet.assignment.data.repository.MainActivityRepository
 import com.haneet.assignment.domain.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,8 +30,9 @@ class MainActivityViewModel @Inject constructor(
     fun setStateEvent(mainStateEvent: MainStateEvent) {
         viewModelScope.launch {
             when (mainStateEvent) {
-                is MainStateEvent.DownloadIt -> {
-                    repository.fetchBookmark(
+                is MainStateEvent.FetchWeather -> {
+                    repository.fetchWeather(
+                        mainStateEvent.latLng
                     ).collect { uiState.value = it }
                 }
 
@@ -44,7 +46,7 @@ class MainActivityViewModel @Inject constructor(
 
 sealed class MainStateEvent {
 
-    data class DownloadIt(var url: String, var context: Activity) : MainStateEvent()
+    data class FetchWeather(var latLng: LatLng) : MainStateEvent()
     object None : MainStateEvent()
 }
 

@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.sainivik.weatherapp.R
-import com.sainivik.weatherapp.databinding.ItemForecastBinding
-import com.sainivik.weatherapp.interfaces.RecyclerClickListener
-import com.sainivik.weatherapp.model.DailyItem
+import com.haneet.assignment.R
+import com.haneet.assignment.data.data_model.weather.DailyItem
+import com.haneet.assignment.databinding.ItemForecastBinding
+import com.haneet.assignment.interfaces.RecyclerViewClickListener
+
 import com.squareup.picasso.Picasso
 
 
@@ -19,7 +20,7 @@ class ForecastListAdapter(
     var max2: Double = 0.0,
     var min2: Double = 0.0,
     var list: ArrayList<DailyItem>,
-    var listener: RecyclerClickListener
+    var listener: RecyclerViewClickListener
 ) :
     RecyclerView.Adapter<ForecastListAdapter.MyViewHolder>() {
 
@@ -37,11 +38,11 @@ class ForecastListAdapter(
     }
 
     private val minTemp: Double by lazy {
-        list.minBy { it.temp.min }?.temp?.min ?: .0
+        list.minByOrNull { it.temp.min }?.temp?.min ?: .0
     }
 
     private val maxTemp: Double by lazy {
-        list.maxBy { it.temp.max }?.temp?.max ?: .0
+        list.maxByOrNull { it.temp.max }?.temp?.max ?: .0
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

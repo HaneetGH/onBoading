@@ -1,7 +1,7 @@
 package com.haneet.assignment.data.data_model.weather
 
 import com.google.gson.annotations.SerializedName
-import com.sainivik.weatherapp.model.WeatherItem
+
 
 data class Current(
 
