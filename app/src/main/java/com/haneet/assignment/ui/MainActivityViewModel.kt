@@ -19,9 +19,6 @@ class MainActivityViewModel @Inject constructor(
     private val repository: MainActivityRepository
 ) : ViewModel() {
 
-    var
-            _uiStateFeatured: MutableLiveData<Int> =
-        MutableLiveData()
     private val _uiState: MutableLiveData<DataState> = MutableLiveData()
     val uiState: MutableLiveData<DataState> get() = _uiState
 

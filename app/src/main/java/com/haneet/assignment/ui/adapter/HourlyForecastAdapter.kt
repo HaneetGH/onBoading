@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso
 class HourlyForecastAdapter(
     var list: ArrayList<HourlyItem>,
     var context: Context,
-    var listener: RecyclerViewClickListener, var picasso: Picasso
+    var picasso: Picasso, var listener: RecyclerViewClickListener,
 ) :
     RecyclerView.Adapter<HourlyForecastAdapter.MyViewHolder>() {
 

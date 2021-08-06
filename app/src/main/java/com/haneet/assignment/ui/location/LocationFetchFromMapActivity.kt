@@ -60,7 +60,7 @@ class LocationFetchFromMapActivity : BaseClass(), RecyclerViewClickListener {
     public override fun setBinding() {
         binding =
             DataBindingUtil.setContentView(this, R.layout.location_fetch_from_map_activity_view)
-        Places.initialize(applicationContext, resources.getString(R.string.GOOGLE_DIRECTION_KEY))
+       // Places.initialize(applicationContext, resources.getString(R.string.GOOGLE_DIRECTION_KEY))
         initMap()
         addListener()
         drawOverlay()
@@ -166,9 +166,9 @@ class LocationFetchFromMapActivity : BaseClass(), RecyclerViewClickListener {
 
             }
         PushDownAnim.setPushDownAnimTo(binding!!.ivSearch)
-            .setOnClickListener { onSearchCalled() }
+            .setOnClickListener { /*onSearchCalled()*/ }
         PushDownAnim.setPushDownAnimTo(binding!!.addressBar)
-            .setOnClickListener { view: View? -> onSearchCalled() }
+            .setOnClickListener {   /*onSearchCalled()*/ }
 
 
 
