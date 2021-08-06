@@ -26,9 +26,9 @@ class LocationFetchViewModel @Inject constructor(
 
         var jobOne = CoroutineScope(Dispatchers.IO).launch {
             val stepOne = async { repository.saveInDb(locationTable) }.await()
-
+            done.postValue(true)
         }
-        jobOne.invokeOnCompletion { cause -> println("We were canceled due to $cause") }
+
     }
 
 

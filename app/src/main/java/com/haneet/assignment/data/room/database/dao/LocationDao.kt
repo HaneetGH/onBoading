@@ -15,7 +15,7 @@ interface LocationDao {
     fun delete(person: LocationTable?)
 
     // Gets all contact in the database
-    @Query("select * from locationMaster")
+    @Query("select * from locationMaster Order by id DESC")
     fun getAllLocations(): List<LocationTable>
 
 

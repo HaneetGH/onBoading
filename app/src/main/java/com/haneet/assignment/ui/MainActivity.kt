@@ -129,7 +129,7 @@ class MainActivity : BaseClass() {
             when (it) {
                 is DataState.Success<*> -> {
                     Log.d("Api Response", "SUCCES");
-
+                    hideLoader()
                     if (it?.data != null) {
                         when (it.task) {
                             Task.FETCH_WEATHER -> {
@@ -204,10 +204,11 @@ class MainActivity : BaseClass() {
 
                 }
                 is DataState.Error -> {
-
+                    hideLoader()
                     Log.d("Api Response", "ERROR ${it.exception.toString()}");
                 }
                 is DataState.Loading -> {
+                    showLoader()
                     Log.d("Api Response", "LOADING $it");
 
 

@@ -45,6 +45,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
 //        holder.binding.setBaseUrl(preference.getImageBaseUrl());
         holder.binding.setModel(list.get(position));
+
     }
 
     @Override
@@ -58,13 +59,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         public MyViewHolder(@NonNull ListItemsBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            binding.delete.setOnClickListener(view -> {
+
+                listener.onClick(view, getAdapterPosition());
+            });
+
             binding.llMain.setOnClickListener(view ->
                     {
 
                         listener.onClick(view, getAdapterPosition());
                     }
-
             );
+
+
 
 
         }

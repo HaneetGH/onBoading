@@ -22,42 +22,60 @@
         android:layout_marginLeft="@dimen/_2sdp"
         android:layout_marginRight="@dimen/_2sdp"
         android:orientation="vertical"
-        app:cardElevation="@dimen/_1sdp"
-
+        app:cardElevation="@dimen/_5sdp"
+app:cardCornerRadius="@dimen/_10sdp"
         app:cardUseCompatPadding="true">
 
-        <LinearLayout
-            android:padding="@dimen/_10sdp"
+        <RelativeLayout
+            android:paddingHorizontal="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-
-            android:orientation="vertical">
-
-            <TextView
-
-
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:orientation="vertical"
 
-                android:layout_marginBottom="@dimen/_3sdp"
 
-                android:paddingHorizontal="@dimen/_2sdp"
-                android:singleLine="true"
-                android:text="@{model.city}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15ssp" />
+                android:padding="@dimen/_10sdp">
+
+                <TextView
+
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="@dimen/_3sdp"
+
+                    android:paddingHorizontal="@dimen/_2sdp"
+                    android:singleLine="true"
+                    android:text="@{model.city}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="30"
+
+                    android:paddingHorizontal="@dimen/_2sdp"
+                    android:singleLine="true"
+                    android:text="@{model.address}"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
 
             <TextView
-
+                android:id="@+id/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:paddingHorizontal="@dimen/_2sdp"
-                android:singleLine="true"
-                android:text="@{model.address}"
-                android:textSize="@dimen/_12ssp" />
-
-        </LinearLayout>
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="Delete"
+                android:textColor="@color/quantum_googred"
+                android:textSize="@dimen/_14ssp" />
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </layout>

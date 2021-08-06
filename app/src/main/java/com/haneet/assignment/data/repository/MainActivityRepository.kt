@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.google.android.gms.maps.model.LatLng
 import com.haneet.assignment.constant.Task
+import com.haneet.assignment.data.MyPreference
 import com.haneet.assignment.data.WeatherApi
 import com.haneet.assignment.data.room.database.dao.LocationDao
 import com.haneet.assignment.domain.DataState
@@ -23,7 +24,7 @@ import javax.inject.Inject
 
 
 class MainActivityRepository @Inject constructor(
-    @ApplicationContext context: Context, private val weatherApi: WeatherApi
+    @ApplicationContext context: Context, private val weatherApi: WeatherApi,private val myPreference: MyPreference
 ) : BaseRepository() {
     private val appContext = context.applicationContext
     var API_KEY = "fae7190d7e6433ec3a45285ffcf55c86"
@@ -38,7 +39,7 @@ class MainActivityRepository @Inject constructor(
                 var response = weatherApi.getWeatherData(
                     latLng!!.latitude,
                     latLng!!.longitude,
-                    "metric",
+                    myPreference.getStoredUnit(),
                     API_KEY
                 )
                 emit(DataState.Success(response, Task.FETCH_WEATHER))

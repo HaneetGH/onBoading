@@ -60,7 +60,7 @@ class LocationFetchFromMapActivity : BaseClass(), RecyclerViewClickListener {
     public override fun setBinding() {
         binding =
             DataBindingUtil.setContentView(this, R.layout.location_fetch_from_map_activity_view)
-       // Places.initialize(applicationContext, resources.getString(R.string.GOOGLE_DIRECTION_KEY))
+        // Places.initialize(applicationContext, resources.getString(R.string.GOOGLE_DIRECTION_KEY))
         initMap()
         addListener()
         drawOverlay()
@@ -257,29 +257,30 @@ class LocationFetchFromMapActivity : BaseClass(), RecyclerViewClickListener {
             source.longitude,
             1
         ) // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+        if (addresses != null && addresses.isNotEmpty()) {
+            val address: String =
+                addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
 
-        val address: String =
-            addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+            try {
 
-        try {
+                val city: String = addresses[0].locality
+                val state: String = addresses[0]?.adminArea
+                val country: String = addresses[0]?.countryName
+                val postalCode: String = addresses[0]?.postalCode
+                val knownName: String =
+                    addresses[0]?.featureName // Only if available else return NULL
 
-            val city: String = addresses[0].locality
-            val state: String = addresses[0]?.adminArea
-            val country: String = addresses[0]?.countryName
-            val postalCode: String = addresses[0]?.postalCode
-            val knownName: String =
-                addresses[0]?.featureName // Only if available else return NULL
+                locationTable = LocationTable()
+                locationTable.Lat = source.latitude
+                locationTable.Lng = source.longitude
+                locationTable.address = address
+                locationTable.city = if (addresses[0].locality == null) state else city
 
-            locationTable = LocationTable()
-            locationTable.Lat = source.latitude
-            locationTable.Lng = source.longitude
-            locationTable.address = address
-            locationTable.city = if (addresses[0].locality == null) state else city
-
-            binding?.usraddress = address
-        } catch (e: Exception) {
-            Log.e("Location Not", e.message.toString())
-            binding?.usraddress = address
+                binding?.usraddress = address
+            } catch (e: Exception) {
+                Log.e("Location Not", e.message.toString())
+                binding?.usraddress = address
+            }
         }
 
     }
