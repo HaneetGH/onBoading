@@ -62,7 +62,7 @@ class HelpFragment : BaseFragment() {
             false
         )
 
-        val pageUrl = "https://haneetgh.github.io/"
+        val pageUrl = "https://github.com/HaneetGH/WeatherWithMvi/blob/master/README.md"
         initWebView()
         setWebClient()
         handlePullToRefresh()

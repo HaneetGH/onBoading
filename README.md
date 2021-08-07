@@ -59,7 +59,7 @@ Pretty simple test case  for Activity UI Unit (ListActivityTest,MainActivity & L
 
 
 ### Artifacts 
-1. [Video Of App Running](https://www.dropbox.com/s/sukzl2uxw0stecr/wea.mp4?dl=0)
+1. [Video Of App Running](https://www.dropbox.com/s/0xhn1ni4bqayt16/video.mp4?dl=0u)
 2. [Compiled Apk](https://betafamily.com/supersend/app/f596f597-b02d-4020-b61e-2c719b3dd6ae (Please consume this link with in 3 days))
 
 
