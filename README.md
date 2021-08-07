@@ -51,12 +51,11 @@
 2. Use [Flow](https://miro.medium.com/max/4800/0*nO9r299fdSEt5qwb.png) and livedata
 
 ### Testing
-Pretty simple test case  
-    Activity UI Unit (ListActivityTest & LocationFetchFromMapActivity)
-       1. Check For Views
-       2. Click On Fab and BottomNavigationView
-       3. Click On LocationFetchFromMapActivity's Button and save information
-       4. Open MainActivity with test lat lng.. populate data and chdck for data on textview
+Pretty simple test case  for Activity UI Unit (ListActivityTest,MainActivity & LocationFetchFromMapActivity)
+1. Check For Views
+2. Click On Fab and BottomNavigationView
+3. Click On LocationFetchFromMapActivity's Button and save information
+4. Open MainActivity with test lat lng.. populate data and chdck for data on textview
 
 
 ### Artifacts 
