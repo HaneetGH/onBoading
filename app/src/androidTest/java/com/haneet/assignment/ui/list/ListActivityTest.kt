@@ -1,29 +1,27 @@
-/*
-package com.haneet.assignment.ui
+package com.haneet.assignment.ui.list
+
 
 import android.view.View
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.NavigationViewActions
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import com.haneet.assignment.R
-import com.haneet.assignment.ui.list.ListActivity
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
-import org.hamcrest.Matcher
+import junit.framework.TestCase
 import org.junit.FixMethodOrder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runners.MethodSorters
+import java.util.regex.Matcher
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-class LoginActivityTest {
-
+class ListActivityTest {
 
     @Rule
     @JvmField
@@ -31,36 +29,33 @@ class LoginActivityTest {
 
     @Test
     fun A_isViewsVisible() {
-        onView(withId(R.id.code)).check(matches(isDisplayed()))
-        onView(withId(R.id.number)).check(matches(isDisplayed()))
-        onView(withId(R.id.continueBtn)).check(matches(isDisplayed()))
+        onView(withId(R.id.fab)).check(matches(isDisplayed()))
+
+    }
+
+
+    @Test
+    fun click_Setting() {
+
+        onView(withId(R.id.settingFragment)).perform(click()).check(matches(isDisplayed()));
     }
 
     @Test
-    fun B_generateOTP() {
-        onView(withId(R.id.number)).perform(typeText("9041422652"));
-        onView(withId(R.id.continueBtn))
-            .perform(ClickOnButtonView(R.id.continueBtn))
+    fun click_blankFragmentOne() {
+        onView(withId(R.id.blankFragmentOne)).perform(click()).check(matches(isDisplayed()));
     }
 
     @Test
-    fun C_verifyOTP() {
-        runBlocking { delay(2000) }
-        onView(withId(R.id.number)).perform(typeText("1234"));
-        onView(withId(R.id.continueBtn))
-            .perform(ClickOnButtonView(R.id.continueBtn))
+    fun click_fab() {
 
-
+        onView(withId(R.id.fab))
+            .perform(ClickOnButtonView(R.id.fab))
     }
-
-
-
-
 
     inner class ClickOnButtonView(continueBtn: Int) : ViewAction {
         internal var click = ViewActions.click()
 
-        override fun getConstraints(): Matcher<View> {
+        override fun getConstraints(): org.hamcrest.Matcher<View> {
             return click.constraints
         }
 
@@ -70,7 +65,10 @@ class LoginActivityTest {
 
         override fun perform(uiController: UiController, view: View) {
             //btnClickMe -> Custom row item view button
-            click.perform(uiController, view.findViewById(R.id.continueBtn))
+            click.perform(uiController, view.findViewById(R.id.fab))
         }
     }
-}*/
+}
+
+
+

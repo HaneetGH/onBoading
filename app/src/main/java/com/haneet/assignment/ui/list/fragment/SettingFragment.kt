@@ -11,6 +11,8 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 
 import com.haneet.assignment.R
@@ -34,7 +36,7 @@ class SettingFragment : BaseFragment() {
     private val viewModel by viewModels<ListActivityViewModel>()
     lateinit var binding: FragmentBlankTwoBinding
 
-
+    lateinit var viewOptiom: View
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +48,7 @@ class SettingFragment : BaseFragment() {
             container,
             false
         )
+
         binding.handler = ClickEvents()
         binding.swich.setOnCheckedChangeListener { compoundButton, b ->
             viewModel.setStateEvent(
@@ -55,6 +58,10 @@ class SettingFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        this.viewOptiom = view
+    }
 
     override fun attachViewModel() {
         viewModel.setStateEvent(MainListStateEvent.FetchDefault)
@@ -112,7 +119,8 @@ class SettingFragment : BaseFragment() {
         }
 
         fun help() {
-
+            var navController: NavController = Navigation.findNavController(viewOptiom)
+            navController.navigate(R.id.helpFragment)
         }
 
     }
