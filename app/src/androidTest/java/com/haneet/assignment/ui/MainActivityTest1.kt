@@ -51,9 +51,9 @@ class MainActivityTest  {
     @Test
     fun saveAd() {
         Thread.sleep(4_000)
-        onView(withId(R.id.preci)).check(matches(not(withText("0.0mm"))));
+       // onView(withId(R.id.preci)).check(matches(not(withText("0.0mm"))));
 
-        onView(withId(R.id.current)).check(matches(not(withText("80"))));
+        onView(withId(R.id.current)).check(matches(not(withText("0"))));
 
 
     }
