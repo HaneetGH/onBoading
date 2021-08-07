@@ -52,7 +52,7 @@
 
 ### Testing
 Pretty simple test case  
-    Activity UI Unit (ListActivityTest & LocationFetchFromMapActivity) :- 
+    Activity UI Unit (ListActivityTest & LocationFetchFromMapActivity)
        1. Check For Views
        2. Click On Fab and BottomNavigationView
        3. Click On LocationFetchFromMapActivity's Button and save information
