@@ -3,12 +3,11 @@
 
 
 ## How IT Works
-ListActivity Has 3 Fragment in which navigation handle by Navigation Component
-LocationFetchFromMapActivity To locate and store data in db
-ListFragment to populate all data from database and people can click on bookmark to check weather
-Setting Fragment has option to reset, change unit, for help section
-
-MainActivity hit weather api and populate data in graphical manner
+1. ListActivity Has 3 Fragment in which navigation handle by Navigation Component 
+2. LocationFetchFromMapActivity To locate and store data in db
+3. ListFragment to populate all data from database and people can click on bookmark to check weather
+4. Setting Fragment has option to reset, change unit, for help section
+5. MainActivity hit weather api and populate data in graphical manner
 
 
 # Mobile Assignment CS
