@@ -67,19 +67,19 @@ class LocationFetchFromMapActivity : BaseClass(), RecyclerViewClickListener {
     }
 
     fun onSearchCalled() {
-     /*   val fields = listOf(
-            Place.Field.ID,
-            Place.Field.NAME,
-            Place.Field.ADDRESS,
-            Place.Field.LAT_LNG,
-            Place.Field.BUSINESS_STATUS,
-            Place.Field.ADDRESS_COMPONENTS
-        )
-        val intent = Autocomplete.IntentBuilder(
-            AutocompleteActivityMode.OVERLAY, fields
-        ).setCountry("IN") //NIGERIA
-            .build(this)
-        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)*/
+        /*   val fields = listOf(
+               Place.Field.ID,
+               Place.Field.NAME,
+               Place.Field.ADDRESS,
+               Place.Field.LAT_LNG,
+               Place.Field.BUSINESS_STATUS,
+               Place.Field.ADDRESS_COMPONENTS
+           )
+           val intent = Autocomplete.IntentBuilder(
+               AutocompleteActivityMode.OVERLAY, fields
+           ).setCountry("IN") //NIGERIA
+               .build(this)
+           startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)*/
     }
 
     private fun showDefaultLocation() {
@@ -168,7 +168,7 @@ class LocationFetchFromMapActivity : BaseClass(), RecyclerViewClickListener {
         PushDownAnim.setPushDownAnimTo(binding!!.ivSearch)
             .setOnClickListener { onSearchCalled() }
         PushDownAnim.setPushDownAnimTo(binding!!.addressBar)
-            .setOnClickListener {   onSearchCalled() }
+            .setOnClickListener { onSearchCalled() }
 
 
 
