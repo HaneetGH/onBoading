@@ -8,7 +8,7 @@ LocationFetchFromMapActivity To locate and store data in db
 ListFragment to populate all data from database and people can click on bookmark to check weather
 Setting Fragment has option to reset, change unit, for help section
 
-MainActivity hit weather api and populate data in that
+MainActivity hit weather api and populate data in graphical manner
 
 
 # Mobile Assignment CS
@@ -52,11 +52,12 @@ MainActivity hit weather api and populate data in that
 2. Use [Flow](https://miro.medium.com/max/4800/0*nO9r299fdSEt5qwb.png) and livedata
 
 ### Testing
-1. 
+Pretty simple test case  
     Activity UI Unit (ListActivityTest & LocationFetchFromMapActivity) :- 
        1. Check For Views
        2. Click On Fab and BottomNavigationView
        3. Click On LocationFetchFromMapActivity's Button and save information
+       4. Open MainActivity with test lat lng.. populate data and chdck for data on textview
 
 
 ### Artifacts 
