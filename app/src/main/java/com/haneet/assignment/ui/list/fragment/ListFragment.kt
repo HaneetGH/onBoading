@@ -64,9 +64,10 @@ class ListFragment : BaseFragment() {
         listAdapter = ListAdapter(listOfLocations, activity) { v, position ->
             when (v.id) {
                 R.id.delete -> {
+                    viewModel.setStateEvent(MainListStateEvent.DeleteItem(listOfLocations[position]))
                     listOfLocations.remove(listOfLocations[position])
                     listAdapter.notifyItemRemoved(position)
-                    viewModel.setStateEvent(MainListStateEvent.DeleteItem(listOfLocations[position]))
+
                 }
                 R.id.llMain -> {
                     val intent = Intent(activity, MainActivity::class.java)
