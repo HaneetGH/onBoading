@@ -10,7 +10,7 @@
 5. MainActivity hit weather api and populate data in graphical manner
 
 
-# Mobile Assignment CS
+
 ## Technology Stack
 
 ## Language  
