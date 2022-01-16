@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.os.Looper
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import com.google.android.gms.location.*
@@ -16,7 +17,7 @@ class LocationProviderLiveData private constructor(var context: Context) : LiveD
         .setFastestInterval(TimeUnit.SECONDS.toMillis(5L))
         .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
     private val mLocationCallback = object : LocationCallback() {
-        override fun onLocationResult(result: LocationResult?) {
+        override fun onLocationResult(result: LocationResult) {
             super.onLocationResult(result)
             var location = result?.locations?.firstOrNull()
             if (location != null) {
@@ -80,10 +81,10 @@ class LocationProviderLiveData private constructor(var context: Context) : LiveD
             // for ActivityCompat#requestPermissions for more details.
 
         } else
-            mFusedLocationProviderClient?.requestLocationUpdates(
+            mFusedLocationProviderClient!!.requestLocationUpdates(
                 locationRequest,
                 mLocationCallback,
-                null
+                Looper.myLooper()!!
             )
         return this
     }
