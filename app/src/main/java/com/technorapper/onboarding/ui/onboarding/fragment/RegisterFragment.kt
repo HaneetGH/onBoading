@@ -37,7 +37,7 @@ class RegisterFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -170,54 +170,27 @@ class RegisterFragment : BaseFragment() {
             Log.d(ContentValues.TAG, "onCodeSent:$verificationId")
 
             // Save verification ID and resending token so we can use them later
-             storedVerificationId = verificationId
+            storedVerificationId = verificationId
             // resendToken = token
         }
     }
 
-    // string for storing our verification ID
+
     private var storedVerificationId: String? = null
     private fun verifyCode(code: String) {
-        // below line is used for getting getting
-        // credentials from our verification id and code.
-        val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, code)
+        viewModel.setStateEvent(MainListStateEvent.RegisterUser(code, storedVerificationId!!))
+    }
 
-        // after getting credential we are
-        // calling sign in method.
-        signInWithCredential(credential)
-    }
-    private fun signInWithCredential(credential: PhoneAuthCredential) {
-        // inside this method we are checking if
-        // the code entered is correct or not.
-        mAuth!!.signInWithCredential(credential)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(
-                        requireActivity(),
-                        "Done",
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                } else {
-                    // if the code is not correct then we are
-                    // displaying an error message to the user.
-                    Toast.makeText(
-                        requireActivity(),
-                        task.exception?.message,
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                }
-            }
-    }
+
+
     inner class ClickEvents() {
 
         fun register(phone: String) {
             var num = "+91$phone"
             sendVerificationCode(num)
         }
-        fun verifyOTP(otp:String)
-        {
+
+        fun verifyOTP(otp: String) {
             verifyCode(otp)
         }
     }

@@ -11,8 +11,10 @@ import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.technorapper.onboarding.data.data_model.LocationTable
 import com.technorapper.onboarding.data.repository.ListActivityRepository
+import com.technorapper.onboarding.data.usecases.FirebaseUseCases
 import com.technorapper.onboarding.domain.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -20,8 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-    private val repository: ListActivityRepository
-
+    private val repository: ListActivityRepository,
+    private val useCases: FirebaseUseCases
 ) : ViewModel() {
     var reset = ObservableBoolean()
     private val _uiState: MutableLiveData<DataState> = MutableLiveData()
@@ -32,7 +34,9 @@ class OnBoardingViewModel @Inject constructor(
 
 
                 is MainListStateEvent.RegisterUser -> {
-
+                    useCases.registerUserWithPhoneNumber(mainStateEvent.verID, mainStateEvent.otp).collect {
+                        Log.d("return",it.toString())
+                    }
 
                 }
             }
@@ -44,8 +48,6 @@ class OnBoardingViewModel @Inject constructor(
 }
 
 
-
-
 sealed class MainListStateEvent {
 
     object FetchBookmark : MainListStateEvent()
@@ -53,7 +55,7 @@ sealed class MainListStateEvent {
     object None : MainListStateEvent()
     object Reset : MainListStateEvent()
     data class UpdateUnit(val which: Boolean) : MainListStateEvent()
-    data class RegisterUser(val phone: String) : MainListStateEvent()
+    data class RegisterUser(val otp: String, val verID: String) : MainListStateEvent()
 }
 
 

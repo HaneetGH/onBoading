@@ -3,6 +3,10 @@ package com.technorapper.onboarding.data.repository
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
 import com.technorapper.onboarding.constant.Task
 import com.technorapper.onboarding.data.MyPreference
 import com.technorapper.onboarding.data.data_model.LocationTable
@@ -30,14 +34,27 @@ class ListActivityRepository @Inject constructor(
     private val appContext = context.applicationContext
 
 
-    suspend fun fetchBookmark(
+    suspend fun registerUser(
+        storedVerificationId: String, code: String
     ): Flow<DataState> {
         return flow {
             emit(DataState.Loading(Task.FETCH))
             // var response: VehicleCategoriesList = null
+            val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, code)
             try {
-                var response = locationDao.getAllLocations()
-                emit(DataState.Success(response, Task.FETCH))
+                var result = FirebaseAuth.getInstance()!!.signInWithCredential(credential)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+
+                        } else {
+                            // if the code is not correct then we are
+                            // displaying an error message to the user.
+
+                        }
+                    }
+                emit(DataState.Success(result, Task.FETCH))
+
+
             } catch (e: Exception) {
                 Log.e("fetch erroe", e.message.toString());
             }
@@ -53,80 +70,6 @@ class ListActivityRepository @Inject constructor(
         } // Use the IO thread for this Flow // Use the IO thread for this Flow // Use the IO thread for this Flow
     }
 
-    suspend fun deleteItem(
-        locationTable: LocationTable
-    ): Flow<DataState> {
-        return flow {
-            emit(DataState.Loading(Task.DELETE))
-            // var response: VehicleCategoriesList = null
-            try {
-                var response = locationDao.delete(locationTable)
-                emit(DataState.Success(response, Task.DELETE))
-            } catch (e: Exception) {
-                Log.e("fetch erroe", e.message.toString());
-            }
 
-
-        }.flowOn(Dispatchers.IO).catch {
-            emit(
-                DataState.ErrorThrowable(
-                    it,
-                    Task.DELETE
-                )
-            )
-        } // Use the IO thread for this Flow // Use the IO thread for this Flow // Use the IO thread for this Flow
-    }
-
-    suspend fun nukeTable(
-    ): Flow<DataState> {
-        return flow {
-            emit(DataState.Loading(Task.NUKE))
-            // var response: VehicleCategoriesList = null
-            try {
-                var response = locationDao.nukeLocation()
-                emit(DataState.Success(response, Task.NUKE))
-            } catch (e: Exception) {
-                Log.e("fetch erroe", e.message.toString());
-            }
-
-
-        }.flowOn(Dispatchers.IO).catch {
-            emit(
-                DataState.ErrorThrowable(
-                    it,
-                    Task.NUKE
-                )
-            )
-        } // Use the IO thread for this Flow // Use the IO thread for this Flow // Use the IO thread for this Flow
-    }
-
-    suspend fun fetchDefault(
-    ): Flow<DataState> {
-        return flow {
-            emit(DataState.Loading(Task.DEFAULT))
-            // var response: VehicleCategoriesList = null
-            try {
-                var response = myPreference.getStoredUnit()
-                emit(DataState.Success(response, Task.DEFAULT))
-            } catch (e: Exception) {
-                Log.e("fetch erroe", e.message.toString());
-            }
-
-
-        }.flowOn(Dispatchers.IO).catch {
-            emit(
-                DataState.ErrorThrowable(
-                    it,
-                    Task.DEFAULT
-                )
-            )
-        } // Use the IO thread for this Flow // Use the IO thread for this Flow // Use the IO thread for this Flow
-    }
-
-    suspend fun updateUnit(
-        unit: Boolean
-    ) {
-        myPreference.setStoredUnit(if (unit) "imperial" else "metric")
-    }
 }
 
