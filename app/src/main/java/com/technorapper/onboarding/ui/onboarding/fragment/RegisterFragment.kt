@@ -57,7 +57,7 @@ class RegisterFragment : BaseFragment() {
 
         binding.handler = ClickEvents()
         setEvents();
-
+        binding.isOTPGenerated = false
         return binding.root
     }
 
@@ -156,7 +156,10 @@ class RegisterFragment : BaseFragment() {
             } else if (e is FirebaseTooManyRequestsException) {
                 // The SMS quota for the project has been exceeded
             }
-
+            if (binding.isOTPGenerated)
+                binding.errorMessageOtp.text = e.message
+            else
+                binding.errorMessage.text = e.message
             // Show a message and update the UI
         }
 
@@ -171,6 +174,7 @@ class RegisterFragment : BaseFragment() {
 
             // Save verification ID and resending token so we can use them later
             storedVerificationId = verificationId
+            binding.isOTPGenerated = true
             // resendToken = token
         }
     }
@@ -180,7 +184,6 @@ class RegisterFragment : BaseFragment() {
     private fun verifyCode(code: String) {
         viewModel.setStateEvent(MainListStateEvent.RegisterUser(code, storedVerificationId!!))
     }
-
 
 
     inner class ClickEvents() {
