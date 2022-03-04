@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.haneet.assignment.data.data_model.LocationTable" />
+            type="com.technorapper.onboarding.data.data_model.LocationTable" />
 
 
     </data>

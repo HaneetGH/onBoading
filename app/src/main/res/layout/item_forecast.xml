@@ -5,7 +5,7 @@
 
         <variable
             name="model"
-            type="com.haneet.assignment.data.data_model.weather.DailyItem" />
+            type="com.technorapper.onboarding.data.data_model.weather.DailyItem" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,12 +38,12 @@
             android:src="@drawable/cloud" />
 
 
-        <com.haneet.assignment.widgets.TemperatureGraphView
+        <com.technorapper.onboarding.widgets.TemperatureGraphView
             android:id="@+id/graph"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="@dimen/_10sdp" />
 
-        <com.haneet.assignment.widgets.TemperatureGraphView
+        <com.technorapper.onboarding.widgets.TemperatureGraphView
             android:id="@+id/graphMin"
             android:layout_width="@dimen/_70sdp"
             android:layout_height="@dimen/_10sdp" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.haneet.assignment">
+    package="com.technorapper.onboarding">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -9,7 +9,7 @@
     <application
 
         android:networkSecurityConfig="@xml/network_security_config"
-        android:name="com.haneet.assignment.application.MyApp"
+        android:name="com.technorapper.onboarding.application.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -29,7 +29,7 @@
 
         <activity
             android:exported="true"
-            android:name=".ui.list.ListActivity">
+            android:name=".ui.onboarding.OnBoardingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,9 +37,6 @@
             </intent-filter>
 
         </activity>
-        <activity android:name="com.haneet.assignment.ui.MainActivity"></activity>
-        <activity android:name=".ui.location.LocationFetchFromMapActivity"></activity>
-
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
