@@ -133,7 +133,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/four_side_less_round_kinda_black"
             android:onClick="@{()->handler.verifyOTP(otp.getText().toString())}"
-            android:text="@string/register"
+            android:text="@string/verify"
             android:textColor="@color/white"
             android:visibility="@{isOTPGenerated?View.VISIBLE:View.GONE}" />
 

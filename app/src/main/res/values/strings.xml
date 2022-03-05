@@ -3,4 +3,5 @@
     <string name="GOOGLE_DIRECTION_KEY" >AIzaSyBe0LjN4RpBClLX7OEXMNpFXFeDP7ZnCp8</string>
     <string name="send_otp">Send OTP</string>
     <string name="register">Register</string>
+    <string name="verify">Verify</string>
 </resources>
